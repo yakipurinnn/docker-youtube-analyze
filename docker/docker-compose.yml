@@ -11,10 +11,11 @@ services:
     ports:
       - $DB_PORT:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-      - MYSQL_DATABASE=$MYSQL_DATABASE
-      - MYSQL_USER=$MYSQL_USER
-      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - TZ='${TZ}'
 
   #phpMyAdmin用コンテナ
   phpmyadmin:
@@ -31,7 +32,7 @@ services:
     volumes:
       - ./phpMyAdmin/config.inc.php:/etc/phpmyadmin/config.inc.php
     ports:
-      - $PMA_PORT:80
+      - ${PMA_PORT}:80
 
   #php用コンテナ
   laravel:
@@ -47,9 +48,9 @@ services:
       - mariadb
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html/laravel-vue/public
-      # - DB_CONNECTION=mysql
-      # - DB_HOST=db
-      # - DB_PORT=3306
-      # - DB_DATABASE=${DB_NAME}
-      # - DB_USERNAME=${DB_USER}
-      # - DB_PASSWORD=${DB_PASSWORD}
+      - DB_CONNECTION=mariadb
+      - DB_HOST=mariadb
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_NAME}
+      - DB_USERNAME=root
+      - DB_PASSWORD=${MYSQL_ROOT_PASSWORD}

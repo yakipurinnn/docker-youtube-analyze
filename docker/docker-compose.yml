@@ -48,7 +48,7 @@ services:
       - mariadb
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html/laravel-vue/public
-      - DB_CONNECTION=mariadb
+      - DB_CONNECTION=mysql
       - DB_HOST=mariadb
       - DB_PORT=${DB_PORT}
       - DB_DATABASE=${DB_NAME}

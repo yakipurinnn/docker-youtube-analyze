@@ -29,7 +29,7 @@ class VideoController extends Controller
 
         Log::debug(print_r($order, true));    //print_rの引数をtrueとすると表示するのではなく戻り値を返す
 
-        return view('video_stats/index_0', compact('order', 'videos', 'view_stats'));
+        return view('video_stats/index', compact('order', 'videos', 'view_stats'));
     }
 
     public function nextPage(Request $request)

@@ -5,4 +5,4 @@
 <title>holo_analyze</title>
 <script src="{{ asset('js\app.js')}}" defer></script>
 <link rel="stylesheet" href="{{ asset('css\app.css') }}">
-<link rel="stylesheet" href="{{ asset('css\video_stats\index.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('css\video_stats\index.css') }}"> -->

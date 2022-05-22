@@ -44,12 +44,17 @@ const mutations = {
 }
 
 const actions = {
-    async getNextPage(context){
+    async getNextPage(context, {order}){
         if (context.state.load){
             if (!context.state.itemLoading){
                 context.commit('changeItemLoading', true)
                 try{
-                    let response = await axios.get('api/videos?page=' + context.state.page)
+                    // let response = await axios.get('api/videos?page=' + context.state.page)
+                    let response = await axios.get('api/videos', {
+                        params: {page: context.state.page,
+                                order: order
+                        }
+                    })
                     if (response.data){
                         context.commit('setVideos', response.data.videos)
                     }

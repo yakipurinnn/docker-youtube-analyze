@@ -2193,6 +2193,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -2222,11 +2227,19 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {};
   },
+  props: {
+    order: {
+      type: String,
+      required: true
+    }
+  },
   methods: {
     getNextPage: function getNextPage() {
       console.log(this.$store.state.nextPage.load); //stateの後に名前空間を挟む
 
-      this.$store.dispatch('nextPage/getNextPage'); //moduleでdispatchを使う場合はmodule名/action名
+      this.$store.dispatch('nextPage/getNextPage', {
+        order: this.order
+      }); //moduleでdispatchを使う場合はmodule名/action名
     }
   }
 });
@@ -2244,6 +2257,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var dateformat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dateformat */ "./node_modules/dateformat/lib/dateformat.js");
 //
 //
 //
@@ -2270,6 +2284,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2302,7 +2320,14 @@ __webpack_require__.r(__webpack_exports__);
           _this.topVideos.push(video);
         });
       }
-    }
+    } //published_dateから秒数表示を消去
+    // topVideos(newTopVideos, oldTopVideos){
+    //     newTopVideos = oldTopVideos.map(video => {
+    //         video.published_date = dateFormat(video.published_date, "yyyy-mm-dd HH:MM")
+    //         return video
+    //     })
+    //}
+
   }
 });
 
@@ -2438,29 +2463,36 @@ var mutations = {
   }
 };
 var actions = {
-  getNextPage: function getNextPage(context) {
+  getNextPage: function getNextPage(context, _ref) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var response;
+      var order, response;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              order = _ref.order;
+
               if (!context.state.load) {
-                _context.next = 18;
+                _context.next = 19;
                 break;
               }
 
               if (context.state.itemLoading) {
-                _context.next = 18;
+                _context.next = 19;
                 break;
               }
 
               context.commit('changeItemLoading', true);
-              _context.prev = 3;
-              _context.next = 6;
-              return axios__WEBPACK_IMPORTED_MODULE_0___default().get('api/videos?page=' + context.state.page);
+              _context.prev = 4;
+              _context.next = 7;
+              return axios__WEBPACK_IMPORTED_MODULE_0___default().get('api/videos', {
+                params: {
+                  page: context.state.page,
+                  order: order
+                }
+              });
 
-            case 6:
+            case 7:
               response = _context.sent;
 
               if (response.data) {
@@ -2468,26 +2500,26 @@ var actions = {
               }
 
               context.commit('pageIncrement');
-              _context.next = 15;
+              _context.next = 16;
               break;
 
-            case 11:
-              _context.prev = 11;
-              _context.t0 = _context["catch"](3);
+            case 12:
+              _context.prev = 12;
+              _context.t0 = _context["catch"](4);
               console.log(_context.t0.response);
               context.commit('changeItemLoading', false);
 
-            case 15:
-              _context.prev = 15;
+            case 16:
+              _context.prev = 16;
               context.commit('changeItemLoading', false);
-              return _context.finish(15);
+              return _context.finish(16);
 
-            case 18:
+            case 19:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee, null, [[3, 11, 15, 18]]);
+      }, _callee, null, [[4, 12, 16, 19]]);
     }))();
   }
 };
@@ -45603,7 +45635,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nli[data-v-2ccaea18]:first-of-type{\r\n    padding-left: 6rem;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nli span[data-v-2ccaea18]{\r\n    text-align: center;\r\n    color: grey;\r\n    font-size: 1.2rem\n}\nli[data-v-2ccaea18]:first-of-type{\r\n    padding:0rem 1.5rem 0rem 6rem;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45627,7 +45659,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-36118f0f] {\r\n    height: 100px;\r\n    margin-top: 100px;\n}\nth[data-v-36118f0f] {\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    top: 55px;\r\n    z-index: 1;\r\n    background: #f5f5f5;\n}\n.thumbnail img[data-v-36118f0f] {\r\n    width: 160px;\r\n    height: 90px;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntable[data-v-36118f0f] {\r\n    height: 160px;\r\n    margin-top: 100px;\n}\nth[data-v-36118f0f] {\r\n    position: -webkit-sticky;\r\n    position: sticky;\r\n    top: 55px;\r\n    z-index: 1;\r\n    background: #f5f5f5;\n}\n.thumbnail img[data-v-36118f0f] {\r\n    width: 160px;\r\n    height: 90px;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -49809,6 +49841,12 @@ var staticRenderFns = [
         [
           _c("div", { staticClass: "containar-fluid" }, [
             _c("ul", { staticClass: "navbar-nav" }, [
+              _c(
+                "li",
+                { staticClass: "nav-item fw-bold d-flex align-items-center" },
+                [_c("div", [_c("span", [_vm._v("並び替え")])])]
+              ),
+              _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
                 _c(
                   "a",
@@ -49929,9 +49967,13 @@ var render = function () {
       _c("tr", [
         _c("th", { staticClass: "fw-bold text-nowrap rank" }, [_vm._v("順位")]),
         _vm._v(" "),
-        _vm.order == "published_date"
+        _vm.order == "published_date" || _vm.order == "published_date_asc"
           ? _c("th", { staticClass: "published_date text-nowrap" }, [
               _vm._v("投稿日時 "),
+            ])
+          : _vm.order == "like_count"
+          ? _c("th", { staticClass: "published_date text-nowrap" }, [
+              _vm._v("高評価数"),
             ])
           : _c("th", { staticClass: "view-count text-nowrap" }, [
               _vm._v("再生回数"),
@@ -49950,12 +49992,20 @@ var render = function () {
     _c(
       "tbody",
       _vm._l(_vm.topVideos, function (video, i) {
-        return _c("tr", { key: video.view_count }, [
+        return _c("tr", { key: video.view_id }, [
           _c("td", { staticClass: "fw-bold rank" }, [_vm._v(_vm._s(i + 1))]),
           _vm._v(" "),
-          _c("td", { staticClass: "view-count text-nowrap" }, [
-            _vm._v(_vm._s(video.view_count) + "回"),
-          ]),
+          _vm.order == "published_date" || _vm.order == "published_date_asc"
+            ? _c("td", { staticClass: "published_date text-nowrap" }, [
+                _vm._v(_vm._s(video.published_date)),
+              ])
+            : _vm.order == "like_count"
+            ? _c("td", { staticClass: "published_date text-nowrap" }, [
+                _vm._v(_vm._s(video.like_count)),
+              ])
+            : _c("td", { staticClass: "view-count text-nowrap" }, [
+                _vm._v(_vm._s(video.view_count) + "回"),
+              ]),
           _vm._v(" "),
           _c("td", { staticClass: "thumbnail" }, [
             _c("div", [_c("img", { attrs: { src: video.thumbnail_url } })]),
@@ -63403,6 +63453,24 @@ var index = {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
 
 
+
+/***/ }),
+
+/***/ "./node_modules/dateformat/lib/dateformat.js":
+/*!***************************************************!*\
+  !*** ./node_modules/dateformat/lib/dateformat.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ dateFormat),
+/* harmony export */   "formatTimezone": () => (/* binding */ formatTimezone),
+/* harmony export */   "i18n": () => (/* binding */ i18n),
+/* harmony export */   "masks": () => (/* binding */ masks)
+/* harmony export */ });
+var token=/d{1,4}|D{3,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|W{1,2}|[LlopSZN]|"[^"]*"|'[^']*'/g;var timezone=/\b(?:[A-Z]{1,3}[A-Z][TC])(?:[-+]\d{4})?|((?:Australian )?(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time)\b/g;var timezoneClip=/[^-+\dA-Z]/g;function dateFormat(date,mask,utc,gmt){if(arguments.length===1&&typeof date==="string"&&!/\d/.test(date)){mask=date;date=undefined}date=date||date===0?date:new Date;if(!(date instanceof Date)){date=new Date(date)}if(isNaN(date)){throw TypeError("Invalid date")}mask=String(masks[mask]||mask||masks["default"]);var maskSlice=mask.slice(0,4);if(maskSlice==="UTC:"||maskSlice==="GMT:"){mask=mask.slice(4);utc=true;if(maskSlice==="GMT:"){gmt=true}}var _=function _(){return utc?"getUTC":"get"};var _d=function d(){return date[_()+"Date"]()};var D=function D(){return date[_()+"Day"]()};var _m=function m(){return date[_()+"Month"]()};var y=function y(){return date[_()+"FullYear"]()};var _H=function H(){return date[_()+"Hours"]()};var _M=function M(){return date[_()+"Minutes"]()};var _s=function s(){return date[_()+"Seconds"]()};var _L=function L(){return date[_()+"Milliseconds"]()};var _o=function o(){return utc?0:date.getTimezoneOffset()};var _W=function W(){return getWeek(date)};var _N=function N(){return getDayOfWeek(date)};var flags={d:function d(){return _d()},dd:function dd(){return pad(_d())},ddd:function ddd(){return i18n.dayNames[D()]},DDD:function DDD(){return getDayName({y:y(),m:_m(),d:_d(),_:_(),dayName:i18n.dayNames[D()],short:true})},dddd:function dddd(){return i18n.dayNames[D()+7]},DDDD:function DDDD(){return getDayName({y:y(),m:_m(),d:_d(),_:_(),dayName:i18n.dayNames[D()+7]})},m:function m(){return _m()+1},mm:function mm(){return pad(_m()+1)},mmm:function mmm(){return i18n.monthNames[_m()]},mmmm:function mmmm(){return i18n.monthNames[_m()+12]},yy:function yy(){return String(y()).slice(2)},yyyy:function yyyy(){return pad(y(),4)},h:function h(){return _H()%12||12},hh:function hh(){return pad(_H()%12||12)},H:function H(){return _H()},HH:function HH(){return pad(_H())},M:function M(){return _M()},MM:function MM(){return pad(_M())},s:function s(){return _s()},ss:function ss(){return pad(_s())},l:function l(){return pad(_L(),3)},L:function L(){return pad(Math.floor(_L()/10))},t:function t(){return _H()<12?i18n.timeNames[0]:i18n.timeNames[1]},tt:function tt(){return _H()<12?i18n.timeNames[2]:i18n.timeNames[3]},T:function T(){return _H()<12?i18n.timeNames[4]:i18n.timeNames[5]},TT:function TT(){return _H()<12?i18n.timeNames[6]:i18n.timeNames[7]},Z:function Z(){return gmt?"GMT":utc?"UTC":formatTimezone(date)},o:function o(){return(_o()>0?"-":"+")+pad(Math.floor(Math.abs(_o())/60)*100+Math.abs(_o())%60,4)},p:function p(){return(_o()>0?"-":"+")+pad(Math.floor(Math.abs(_o())/60),2)+":"+pad(Math.floor(Math.abs(_o())%60),2)},S:function S(){return["th","st","nd","rd"][_d()%10>3?0:(_d()%100-_d()%10!=10)*_d()%10]},W:function W(){return _W()},WW:function WW(){return pad(_W())},N:function N(){return _N()}};return mask.replace(token,function(match){if(match in flags){return flags[match]()}return match.slice(1,match.length-1)})}var masks={default:"ddd mmm dd yyyy HH:MM:ss",shortDate:"m/d/yy",paddedShortDate:"mm/dd/yyyy",mediumDate:"mmm d, yyyy",longDate:"mmmm d, yyyy",fullDate:"dddd, mmmm d, yyyy",shortTime:"h:MM TT",mediumTime:"h:MM:ss TT",longTime:"h:MM:ss TT Z",isoDate:"yyyy-mm-dd",isoTime:"HH:MM:ss",isoDateTime:"yyyy-mm-dd'T'HH:MM:sso",isoUtcDateTime:"UTC:yyyy-mm-dd'T'HH:MM:ss'Z'",expiresHeaderFormat:"ddd, dd mmm yyyy HH:MM:ss Z"};var i18n={dayNames:["Sun","Mon","Tue","Wed","Thu","Fri","Sat","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],monthNames:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","January","February","March","April","May","June","July","August","September","October","November","December"],timeNames:["a","p","am","pm","A","P","AM","PM"]};var pad=function pad(val){var len=arguments.length>1&&arguments[1]!==undefined?arguments[1]:2;return String(val).padStart(len,"0")};var getDayName=function getDayName(_ref){var y=_ref.y,m=_ref.m,d=_ref.d,_=_ref._,dayName=_ref.dayName,_ref$short=_ref["short"],_short=_ref$short===void 0?false:_ref$short;var today=new Date;var yesterday=new Date;yesterday.setDate(yesterday[_+"Date"]()-1);var tomorrow=new Date;tomorrow.setDate(tomorrow[_+"Date"]()+1);var today_d=function today_d(){return today[_+"Date"]()};var today_m=function today_m(){return today[_+"Month"]()};var today_y=function today_y(){return today[_+"FullYear"]()};var yesterday_d=function yesterday_d(){return yesterday[_+"Date"]()};var yesterday_m=function yesterday_m(){return yesterday[_+"Month"]()};var yesterday_y=function yesterday_y(){return yesterday[_+"FullYear"]()};var tomorrow_d=function tomorrow_d(){return tomorrow[_+"Date"]()};var tomorrow_m=function tomorrow_m(){return tomorrow[_+"Month"]()};var tomorrow_y=function tomorrow_y(){return tomorrow[_+"FullYear"]()};if(today_y()===y&&today_m()===m&&today_d()===d){return _short?"Tdy":"Today"}else if(yesterday_y()===y&&yesterday_m()===m&&yesterday_d()===d){return _short?"Ysd":"Yesterday"}else if(tomorrow_y()===y&&tomorrow_m()===m&&tomorrow_d()===d){return _short?"Tmw":"Tomorrow"}return dayName};var getWeek=function getWeek(date){var targetThursday=new Date(date.getFullYear(),date.getMonth(),date.getDate());targetThursday.setDate(targetThursday.getDate()-(targetThursday.getDay()+6)%7+3);var firstThursday=new Date(targetThursday.getFullYear(),0,4);firstThursday.setDate(firstThursday.getDate()-(firstThursday.getDay()+6)%7+3);var ds=targetThursday.getTimezoneOffset()-firstThursday.getTimezoneOffset();targetThursday.setHours(targetThursday.getHours()-ds);var weekDiff=(targetThursday-firstThursday)/(864e5*7);return 1+Math.floor(weekDiff)};var getDayOfWeek=function getDayOfWeek(date){var dow=date.getDay();if(dow===0){dow=7}return dow};var formatTimezone=function formatTimezone(date){return(String(date).match(timezone)||[""]).pop().replace(timezoneClip,"").replace(/GMT\+0000/g,"UTC")};
 
 /***/ })
 

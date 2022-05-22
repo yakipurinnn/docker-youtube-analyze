@@ -23,7 +23,7 @@ table header固定の参考元: https://lv1meg.hatenablog.com/entry/2020/05/03/0
                 </div>
 
                 <div class="col-md-2 offset-5 mb-4" id="next-page-button">
-                    <next-page-component><next-page-component>
+                    <next-page-component :order="{{json_encode($order)}}"><next-page-component>
                 </div>
             </div>
         </div>
